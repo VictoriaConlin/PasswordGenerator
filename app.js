@@ -53,14 +53,14 @@ const randomFunctions = {
 
 
 // Selection the DOM Elements
-const resultEL = document.querySelector(`#result`);
-const clipboardEL = document.querySelector(`#clipboard`);
-const lowercaseEL = document.querySelector(`#lowercase`);
-const uppercaseEL = document.querySelector(`#uppercase`);
-const numbersEL = document.querySelector(`#numbers`);
-const symbolsEL = document.querySelector(`#symbols`);
-const lengthEL = document.querySelector(`#length`);
-const generateEL = document.querySelector(`#generate`);
+const resultEl = document.querySelector(`#result`);
+const clipboardEl = document.querySelector(`#clipboard`);
+const lowercaseEl = document.querySelector(`#lowercase`);
+const uppercaseEl = document.querySelector(`#uppercase`);
+const numbersEl = document.querySelector(`#numbers`);
+const symbolsEl = document.querySelector(`#symbols`);
+const lengthEl = document.querySelector(`#length`);
+const generateEl = document.querySelector(`#generate`);
 
 // Function that accepts true or false values as well as a number as arguments
 // NOTE: The Checkbox inputs and number input will determine the value/arguments entered into this function
@@ -123,4 +123,23 @@ function generatePassword(lower, upper, number, symbol, length) {
 
 // Example of generatePassword function
 // NOTE: Using the starting value for when the page first loads
-generatePassword(true, true, true, true, 5);
+generatePassword(true, true, true, true, 10);
+
+
+// Event Listener for when the "Generate Password" button is clicked
+generateEl.addEventListener(`click`, () => {
+    // Checked if the following options/checkboxes are selected/checked and setting the true or false values to the respective variables
+    const hasLower = lowercaseEl.checked;
+    const hasUpper = uppercaseEl.checked;
+    const hasNumber = numbersEl.checked;
+    const hasSymbol = symbolsEl.checked;
+
+    // Accessing the value for the number input and changing the value from a string to a number
+    // NOTE: The value returned from a number input is a string value
+    const length = parseInt(lengthEl.value);
+
+    console.log(hasLower, hasUpper, hasNumber, hasSymbol, length);
+
+    // The generatePassword function takes the true/false values determined be the checkboxes as well as the number from the number input as arguments and returns a string (AKA the Password) which is set as the innerText value for the "result" element
+    resultEl.innerText = generatePassword(hasLower, hasUpper, hasNumber, hasSymbol, length);
+});
